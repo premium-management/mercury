@@ -2,7 +2,6 @@
 .bundle
 .rvmrc
 .powenv
-.idea
 mercury.ids
 
 # Local config files

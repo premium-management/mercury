@@ -28,8 +28,6 @@
       @element.find('#media_image_url').val(image.attr('src'))
       @element.find('#media_image_alignment').val(image.attr('align'))
       @element.find('#media_image_float').val(if image.attr('style')? then image.css('float') else '')
-      @element.find('#media_image_width').val(image.width() || '')
-      @element.find('#media_image_height').val(image.height() || '')
       @focus('#media_image_url')
 
     # if we're editing an iframe (assume it's a video for now)
@@ -101,10 +99,7 @@
       when 'image_url'
         attrs = {src: @element.find('#media_image_url').val()}
         attrs['align'] = alignment if alignment = @element.find('#media_image_alignment').val()
-        attrs['style'] = '';
-        attrs['style'] += 'float: ' + float + '; ' if float = @element.find('#media_image_float').val()
-        attrs['style'] += 'width: ' + width + 'px; ' if width = @element.find('#media_image_width').val()
-        attrs['style'] += 'height: ' + height + 'px;' if height = @element.find('#media_image_height').val()
+        attrs['style'] = 'float: ' + float + ';' if float = @element.find('#media_image_float').val()
         Mercury.trigger('action', {action: 'insertImage', value: attrs})
 
       when 'youtube_url'

@@ -1,7 +1,8 @@
 describe "Mercury.Region", ->
 
+  template 'mercury/region.html'
+
   beforeEach ->
-    fixture.load('mercury/region.html')
     Mercury.config.regions.attribute = 'custom-region-attribute'
     Mercury.config.regions.dataAttributes = []
 
@@ -156,7 +157,7 @@ describe "Mercury.Region", ->
         expect(@triggerSpy.argsForCall[0]).toEqual(['hide:toolbar', {type: 'snippet', immediately: false}])
 
 
-  describe "#content", ->
+  describe "#html", ->
 
     beforeEach ->
       @region = new Mercury.Region($('#region_with_snippet'), window)
@@ -170,10 +171,6 @@ describe "Mercury.Region", ->
       it "replaces snippet content with an indentifier if asked", ->
         content = @region.content(null, true)
         expect(content).toEqual('contents<div class="example-snippet" data-snippet="snippet_1">[snippet_1]</div>')
-
-      it "does not execute JavaScript contained within the region (bug fix)", ->
-        (new Mercury.Region($('#region_with_javascript_snippet'), window)).content()
-        expect($('#modifiable-element').children().length).toEqual(0)
 
     describe "setting html", ->
 

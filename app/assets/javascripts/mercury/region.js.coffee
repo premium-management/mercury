@@ -48,10 +48,8 @@ class @Mercury.Region
       @element.html(value)
     else
       # sanitize the html before we return it
-      # create the element without jQuery since $el.html() executes <script> tags
-      container = document.createElement('div')
-      container.innerHTML = @element.html().replace(/^\s+|\s+$/g, '')
-      container = $(container)
+      container = jQuery('<div>').appendTo(@document.createDocumentFragment())
+      container.html(@element.html().replace(/^\s+|\s+$/g, ''))
 
       # replace snippet contents to be an identifier
       if filterSnippets then for snippet in container.find('[data-snippet]')
